@@ -1,0 +1,6 @@
+# Datasets
+dann/datasets/
+dann_cascade/dataset/
+
+# Parquet
+*.parquet
