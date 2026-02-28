@@ -17,7 +17,7 @@ More information about it and the training, validation, and test datasets can be
 ## dann
 This folder showcases the PLM method: a "Domain Adversarial Neural Network" using codeBERT (an encoder capable of understanding natural language and programming language), used to solve task A and task C.
 
-![DANN pipeline](codeBERT_pipeline.png)
+![DANN pipeline](codeBERT_pipeline.png "codeBERT pipeline")
 
 The src subfolder contains three core scripts: train.py, predict.py, and error_analysis.py. Each script integrates with ***Weights & Biases***, a free machine learning platform used to log model states and visualize training curves. To use these scripts, you will only need to create a free W&B account.
 
