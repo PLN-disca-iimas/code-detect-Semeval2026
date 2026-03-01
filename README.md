@@ -27,7 +27,17 @@ bash
 
 ***Example*** python ./train.py \--train_path ./training_path.parquet \--val_path ./validation_path.parquet \--name_run "name_of_the_run"
 
+***predict.py*** from the training data, restores the structure, and from the wand platform, gets the state of the trained DANN model, then predicts the test dataset, and stores the prediction in a .csv file. To run this code, you will have to provide: **train_path*** (local path to the specific training dataset task stored in parquet format), ***val_path** (local path to the test_dataset stored in parquet format), ***output_path*** (local path in which you want to store the .csv file), and ***artifact_name*** (the artifact name of the wandb run).
 
+bash
+
+***Example*** python ./predict.py \--train_path ./training_path.parquet \--test_path ./test_path.parquet \--name_run "name_of_the_run" \--output_path output_path.csv
+
+***error_analysis.py*** compares the prediction stored in the .csv file with the original dataset and performs the calculation of accuracy, precision, recall, and f1-score. Produces the confusion matrix, makes distribution histograms for the errors, and stores them in an output folder.
+
+bash
+
+***Example*** python ./error_analysis.py \--prediction_path ./prediction_path.csv \--test_path ./test_path.parquet \--output_path output_folder/
 
 ## dann_cascade
 ## LLM
