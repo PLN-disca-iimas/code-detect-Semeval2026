@@ -14,24 +14,29 @@ More information about it and the training, validation, and test datasets can be
  - LLM
  - Stylometry
 ## gnn
-## dann
-This folder showcases the PLM method: a "Domain Adversarial Neural Network" using codeBERT (an encoder capable of understanding natural language and programming language), used to solve task A and task C.
+## dann and dann_cascade
+These folders showcase the PLM method: a "Domain Adversarial Neural Network" using codeBERT (an encoder capable of understanding natural language and programming language), used to solve task A (dann), task B (dann_cascade), and task C (dann).
 
 ![DANN pipeline](codeBERT_pipeline.png "codeBERT pipeline")
 
-The src subfolder contains three core scripts: train.py, predict.py, and error_analysis.py. Each script integrates with ***Weights & Biases***, a free machine learning platform used to log model states and visualize training curves. To use these scripts, you will only need to create a free W&B account.
+The src subfolder contains three core scripts: train.py, predict.py, and error_analysis.py. Each script integrates with ***Weights & Biases***, a machine learning platform used to log model states and visualize training curves. To use these scripts, you will only need to create a free W&B account.
 
-***train.py*** trains the model. To run this code, you will have to give: ***train_path*** (local path to the specific training dataset task stored in parquet format), ***val_path** (local path to the validation_dataset stored in parquet format), ***name_run*** (name of the run). You can also change some hyperparameters, e.g., the number of epochs, batch size, max_length, and learning rate.
+***train.py*** trains the model. To run this code, you will have to give: ***train_path*** (local path to the specific training dataset task stored in parquet format), ***val_path** (local path to the validation_dataset stored in parquet format), ***name_run*** (name of the run), and if ***dann_cascade*** ***binary*** (a number to indicate if it is binary -0- or multiclass -1-). You can also change some hyperparameters, e.g., the number of epochs, batch size, max_length, and learning rate.
 
 bash
 
 ***Example*** python ./train.py \--train_path ./training_path.parquet \--val_path ./validation_path.parquet \--name_run "name_of_the_run"
 
-***predict.py*** from the training data, restores the structure, and from the wand platform, gets the state of the trained DANN model, then predicts the test dataset, and stores the prediction in a .csv file. To run this code, you will have to provide: **train_path*** (local path to the specific training dataset task stored in parquet format), ***val_path** (local path to the test_dataset stored in parquet format), ***output_path*** (local path in which you want to store the .csv file), and ***artifact_name*** (the artifact name of the wandb run).
+***Example*** python ./train.py \--train_path ./training_path.parquet \--val_path ./validation_path.parquet \--name_run "name_of_the_run" \--binary 0
+
+
+***predict.py*** from the training data, restores the structure, and from the wand platform, gets the state of the trained DANN model, then predicts the test dataset, and stores the prediction in a .csv file. To run this code, you will have to provide: **train_path*** (local path to the specific training dataset task stored in parquet format), ***val_path** (local path to the test_dataset stored in parquet format), ***output_path*** (local path in which you want to store the .csv file), ***artifact_name*** (the artifact name of the wandb run), and if ***dann_cascade*** ***artifac_name2*** (the second artifact name of the wandb run).
 
 bash
 
-***Example*** python ./predict.py \--train_path ./training_path.parquet \--test_path ./test_path.parquet \--name_run "name_of_the_run" \--output_path output_path.csv
+***Example*** python ./predict.py \--train_path ./training_path.parquet \--test_path ./test_path.parquet \--artifact_name "name_of_the_artifact" \--output_path output_path.csv
+
+***Example*** python ./predict.py \--train_path ./training_path.parquet \--test_path ./test_path.parquet \--artifact_name "name_of_the_artifact" \--artifact_name2 "name_of_the_second_artifact" \--output_path output_path.csv
 
 ***error_analysis.py*** compares the prediction stored in the .csv file with the original dataset and performs the calculation of accuracy, precision, recall, and f1-score. Produces the confusion matrix, makes distribution histograms for the errors, and stores them in an output folder.
 
@@ -39,6 +44,5 @@ bash
 
 ***Example*** python ./error_analysis.py \--prediction_path ./prediction_path.csv \--test_path ./test_path.parquet \--output_path output_folder/
 
-## dann_cascade
 ## LLM
 ## Stylometry
