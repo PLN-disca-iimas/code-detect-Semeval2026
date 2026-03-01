@@ -21,7 +21,7 @@ These folders showcase the PLM method: a "Domain Adversarial Neural Network" usi
 
 The src subfolder contains three core scripts: train.py, predict.py, and error_analysis.py. Each script integrates with ***Weights & Biases***, a machine learning platform used to log model states and visualize training curves. To use these scripts, you will only need to create a free W&B account.
 
-***train.py*** trains the model. To run this code, you will have to give: ***train_path*** (local path to the specific training dataset task stored in parquet format), ***val_path** (local path to the validation_dataset stored in parquet format), ***name_run*** (name of the run), and if ***dann_cascade*** ***binary*** (a number to indicate if it is binary -0- or multiclass -1-). You can also change some hyperparameters, e.g., the number of epochs, batch size, max_length, and learning rate.
+***train.py*** trains the model. To run this code, you will have to give: ***train_path*** (local path to the specific training dataset task stored in parquet format), ***val_path*** (local path to the validation dataset stored in parquet format), ***name_run*** (name of the run), and if dann_cascade ***binary*** (a number to indicate if it is binary -0- or multiclass -1-). You can also change some hyperparameters, e.g., the number of epochs, batch size, max_length, and learning rate.
 
 bash
 
@@ -30,7 +30,7 @@ bash
 ***Example*** python ./train.py \--train_path ./training_path.parquet \--val_path ./validation_path.parquet \--name_run "name_of_the_run" \--binary 0
 
 
-***predict.py*** from the training data, restores the structure, and from the wand platform, gets the state of the trained DANN model, then predicts the test dataset, and stores the prediction in a .csv file. To run this code, you will have to provide: **train_path*** (local path to the specific training dataset task stored in parquet format), ***val_path** (local path to the test_dataset stored in parquet format), ***output_path*** (local path in which you want to store the .csv file), ***artifact_name*** (the artifact name of the wandb run), and if ***dann_cascade*** ***artifac_name2*** (the second artifact name of the wandb run).
+***predict.py*** from the training data, restores the structure, and from the wand platform, gets the state of the trained DANN model, then predicts the test dataset, and stores the prediction in a .csv file. To run this code, you will have to provide: ***train_path*** (local path to the specific training dataset task stored in parquet format), ***test_path*** (local path to the test dataset stored in parquet format), ***output_path*** (local path in which you want to store the .csv file), ***artifact_name*** (the artifact name of the wandb run), and if dann_cascade ***artifac_name2*** (the second artifact name of the wandb run).
 
 bash
 
