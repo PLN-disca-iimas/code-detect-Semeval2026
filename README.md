@@ -45,4 +45,5 @@ bash
 ***Example*** python ./error_analysis.py \--prediction_path ./prediction_path.csv \--test_path ./test_path.parquet \--output_path output_folder/
 
 ## LLM
+We use the LLM Command A from Cohere to tackle subtask A, We extract two examples from the training data set and use them as prompts for each classification. We tested different temperature values, and the best results were given by the value of 0.3.
 ## Stylometry
