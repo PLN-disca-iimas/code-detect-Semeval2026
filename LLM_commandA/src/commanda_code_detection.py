@@ -10,7 +10,7 @@ import pandas as pd
 from tqdm import tqdm
 from sklearn.metrics import accuracy_score, classification_report
 import cohere
-co = cohere.ClientV2("API")
+co = cohere.ClientV2("Poner_la_API_correspondiente")
 
 """# Functions"""
 
