@@ -46,4 +46,46 @@ bash
 
 ## LLM
 We use the LLM Command A from Cohere to tackle subtask A. We extract two examples from the training data set and use them as prompts for each classification.
+
 ## Stylometry
+This folder implements a stylometric approach for detecting machine-generated code by extracting statistical and structural features from source code and training a traditional machine learning classifier.
+
+The method is based on the hypothesis that human-written and machine-generated code exhibit measurable differences in writing style, such as token usage, indentation patterns, and comment distribution.
+
+The folder contains three main scripts:
+
+- features_extractor.py  
+- data_utils.py  
+- train_xgboost.py  
+
+### features_extractor.py
+This script defines a set of handcrafted stylometric features computed directly from raw code. The extracted features include:
+
+- Token-based features: total number of tokens, number of unique tokens, and token diversity ratio.
+- Line-based features: average line length.
+- Indentation features: mean indentation, standard deviation of indentation, and number of indentation levels.
+- Code length: total number of characters in the snippet.
+- Comment features: total number of comments and comment density.
+
+These features are designed to capture structural and stylistic patterns that differ between human and machine-generated code.
+
+### data_utils.py
+This script is responsible for transforming the original dataset into a structured feature matrix.
+
+Given a dataframe containing code snippets, it applies the feature extraction pipeline to each instance and constructs a new dataframe with the computed stylometric features. For training data, the corresponding labels are preserved, while for test data only the features and identifiers are retained.
+
+### train_xgboost.py
+This script trains a classification model using the extracted stylometric features.
+
+The pipeline consists of the following steps:
+
+1. Load the training dataset in parquet format.
+2. Extract stylometric features using the feature extraction pipeline.
+3. Normalize the features using a StandardScaler.
+4. Train an XGBoost classifier with GPU acceleration.
+5. Load the validation dataset and apply the same preprocessing.
+6. Evaluate the model using classification metrics such as precision, recall, and F1-score.
+
+The model is configured for multi-class classification and uses a large number of estimators to capture complex patterns in the feature space.
+
+***Example*** python ./train_xgboost.py
