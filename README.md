@@ -87,5 +87,3 @@ The pipeline consists of the following steps:
 6. Evaluate the model using classification metrics such as precision, recall, and F1-score.
 
 The model is configured for multi-class classification and uses a large number of estimators to capture complex patterns in the feature space.
-
-***Example*** python ./train_xgboost.py
